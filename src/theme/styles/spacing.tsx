@@ -1,0 +1,70 @@
+import css, { SerializedStyles } from "@emotion/css/macro";
+import { mapValues } from "../../utilities";
+
+/**
+ * Spacing in terms of pixels
+ * usinng 8pt grid
+ * xs: 4, s: 8, m: 16, l: 24, xl: 32
+ * xxl: 40, xxxl: 48, xxxxl: 56
+ */
+export const rawSpacing = {
+  zero: 0,
+  xs: 4,
+  s: 8,
+  m: 16,
+  l: 24,
+  xl: 32,
+  xxl: 40,
+  xxxl: 48,
+  xxxxl: 56,
+};
+
+/**
+ * Horizontal flex display
+ * xs: 4, s: 8, m: 16, l: 24, xl: 32
+ * xxl: 40, xxxl: 48, xxxxl: 56
+ */
+export const horizontalStackCss: {
+  [key: string]: SerializedStyles;
+} = mapValues({
+  obj: rawSpacing,
+  mapper: (spacingInPx: number) => css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    > :not(:last-child) {
+      margin-right: ${spacingInPx}px;
+    }
+
+    > *:last-child {
+      margin-right: 0px;
+    }
+  `,
+});
+
+/**
+ * Vertical flex display
+ * xs: 4, s: 8, m: 16, l: 24, xl: 32
+ * xxl: 40, xxxl: 48, xxxxl: 56
+ */
+export const verticalStackCss: {
+  [key: string]: SerializedStyles;
+} = mapValues({
+  obj: rawSpacing,
+  mapper: (spacingInPx: number) => css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    > :not(:last-child) {
+      margin-bottom: ${spacingInPx}px;
+    }
+
+    > *:last-child {
+      margin-bottom: 0px;
+    }
+  `,
+});

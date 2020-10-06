@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/** @jsx jsx */
+import { Global, jsx, css } from "@emotion/core";
+import { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HomePage } from "./components/pages/home";
+import { Header } from "./components/common/header/";
+import { DarkMode } from "./context/dark_mode";
+import { Footer } from "./components/common/footer";
 
-function App() {
+export const App = () => {
+  const [isDarkMode, setDarkMode] = useState(false);
+
+  const setDarKModeOn = () => {
+    setDarkMode(true);
+  };
+  const setDarkModeOff = () => {
+    setDarkMode(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Global
+        styles={css`
+          body {
+            background-color: ${isDarkMode ? "#0c0c0c" : "#fffefc"};
+            transition-timing-function: ease-in;
+            transition: 0.75s;
+            /* font-family: 'Crimson Text', serif; */
+          }
+        `}
+      />
+      <DarkMode.Provider value={isDarkMode}>
+        <Router>
+          <Header
+            setDarkModeOn={setDarKModeOn}
+            setDarkModeOff={setDarkModeOff}
+            isDarkMode={isDarkMode}
+          />
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+          </Switch>
+          <Footer />
+        </Router>
+      </DarkMode.Provider>
     </div>
   );
-}
-
-export default App;
+};
