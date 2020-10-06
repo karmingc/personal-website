@@ -7,13 +7,14 @@ _Last updated on October 6th, 2020_
 
 ### 1. Install VSCODE
 
-_For this project, I used Vscode, so for other IDEs, just make sure they have the right extensions._
+_Recommend using Visual Studio Code [https://code.visualstudio.com/].For other code editors/IDEs, make sure they have the right extensions._
 <br/>
 To enable `Eslint` + `Prettier`, remember to download the extensions in Visual Studio Code.
 
 ### 2. Setup
 
 node version: 14.3.0
+<br/>
 npm version: 6.14.5
 
 1. Install `node`. [https://nodejs.org/en/].
