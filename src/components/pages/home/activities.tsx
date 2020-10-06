@@ -11,14 +11,8 @@ import { DarkMode } from "../../../context/dark_mode";
  * completed -> done but not live, link github
  * live -> in production
  */
-export enum EntryStatus {
-  IN_PROGRESS = "IN_PROGRESS",
-  COMPLETED = "COMPLETED",
-  LIVE = "LIVE",
-}
 
 interface EntryProps {
-  status: EntryStatus.COMPLETED | EntryStatus.COMPLETED;
   children?: React.ReactNode;
   title: string;
   targetUrl?: string;
@@ -29,7 +23,7 @@ interface EntryProps {
  * @param props status, children, title and targetUrl
  */
 export const Entry = (props: EntryProps) => {
-  const { status, children, title, targetUrl } = props;
+  const { children, title, targetUrl } = props;
   const DarkModeState = useContext(DarkMode);
   const STYLES_FONT_COLOR = DarkModeState
     ? css`
@@ -46,13 +40,10 @@ export const Entry = (props: EntryProps) => {
         align-items: flex-start;
       `}
     >
-      {status === EntryStatus.COMPLETED || status === EntryStatus.LIVE ? (
-        <A targetUrl={targetUrl}>
-          <H3>{title}</H3>
-        </A>
-      ) : (
+      <A targetUrl={targetUrl}>
         <H3>{title}</H3>
-      )}
+      </A>
+
       <div
         css={[
           css`
@@ -71,6 +62,28 @@ export const Entry = (props: EntryProps) => {
  * Activites section for home page
  */
 export const Activities = () => {
+  const entries = [
+    {
+      targetUrl: "https://www.every.org/join/@karmingchin",
+      title: "Every.org",
+      description: "Discover and support various 501(c)(3) nonprofits",
+    },
+    {
+      targetUrl: "https://www.dragonsbeardcandy.com",
+      title: "Dragon's Beard Candy",
+      description: "Emperor's dessert",
+    },
+    {
+      targetUrl: "https://www.playovernight.com",
+      title: "Overnight",
+      description: "Guessing simulation game",
+    },
+    {
+      targetUrl: "https://www.resumehub.org",
+      title: "ResumeHub",
+      description: "Resume + resource repository of swe interns",
+    },
+  ];
   return (
     <section
       css={css`
@@ -79,34 +92,17 @@ export const Activities = () => {
       `}
     >
       <H2>Activities</H2>
-      <Entry
-        status={EntryStatus.COMPLETED}
-        targetUrl={"https://www.every.org/join/@karmingchin"}
-        title={"Every.org"}
-      >
-        <span>Discover and support various 501(c)(3) nonprofits</span>
-      </Entry>
-      <Entry
-        status={EntryStatus.COMPLETED}
-        targetUrl={"https://www.dragonsbeardcandy.com"}
-        title={"Dragon's Beard Candy"}
-      >
-        <span>Emperor's dessert</span>
-      </Entry>
-      <Entry
-        status={EntryStatus.COMPLETED}
-        targetUrl={"https://www.playovernight.com"}
-        title={"Overnight"}
-      >
-        <span>Guessing simulation game</span>
-      </Entry>
-      <Entry
-        status={EntryStatus.COMPLETED}
-        targetUrl={"https://www.resumehub.org"}
-        title={"ResumeHub"}
-      >
-        <span>Resume + resource repository of swe interns</span>
-      </Entry>
+      {entries.map((entry, entryIdx) => {
+        return (
+          <Entry
+            key={`${entryIdx}-${entry.title}`}
+            targetUrl={entry.targetUrl}
+            title={entry.title}
+          >
+            <span>{entry.description}</span>
+          </Entry>
+        );
+      })}
     </section>
   );
 };
