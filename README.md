@@ -7,7 +7,7 @@ _Last updated on October 6th, 2020_
 
 ### 1. Install VSCODE
 
-_Recommend using Visual Studio Code [https://code.visualstudio.com/].For other code editors/IDEs, make sure they have the right extensions._
+_Recommend using Visual Studio Code [https://code.visualstudio.com]. For other code editors/IDEs, make sure they have the right extensions._
 <br/>
 To enable `Eslint` + `Prettier`, remember to download the extensions in Visual Studio Code.
 
