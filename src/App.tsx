@@ -1,47 +1,44 @@
 /** @jsx jsx */
 import { Global, jsx, css } from "@emotion/core";
-import { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import { HomePage } from "./components/pages/home";
-import { Header } from "./components/common/header/";
-import { DarkMode } from "./context/dark_mode";
-import { Footer } from "./components/common/footer";
+
+import { theme } from "./theme";
 
 export const App = () => {
-  const [isDarkMode, setDarkMode] = useState(false);
-
-  const setDarKModeOn = () => {
-    setDarkMode(true);
-  };
-  const setDarkModeOff = () => {
-    setDarkMode(false);
-  };
-
   return (
     <div>
       <Global
         styles={css`
           body {
-            background-color: ${isDarkMode ? "#0c0c0c" : "#fffefc"};
-            transition-timing-function: ease-in;
-            transition: 0.75s;
-            /* font-family: 'Crimson Text', serif; */
+            background-color: ${theme.backgroundBlack};
+
+            font-family: "Noto Sans KR", sans-serif;
+
+            h1 {
+              font-size: 48px;
+            }
+
+            p {
+              font-size: 24px;
+            }
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            p {
+              color: ${theme.fontPrimary};
+            }
           }
         `}
       />
-      <DarkMode.Provider value={isDarkMode}>
-        <Router>
-          <Header
-            setDarkModeOn={setDarKModeOn}
-            setDarkModeOff={setDarkModeOff}
-            isDarkMode={isDarkMode}
-          />
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-          </Switch>
-          <Footer />
-        </Router>
-      </DarkMode.Provider>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+        </Switch>
+      </Router>
     </div>
   );
 };
