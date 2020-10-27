@@ -1,9 +1,7 @@
 /** @jsx jsx */
 import { jsx, SerializedStyles } from "@emotion/core";
 import css from "@emotion/css/macro";
-import React, { ReactText, useContext } from "react";
-
-import { DarkMode } from "../../../context/dark_mode";
+import React, { ReactText } from "react";
 
 interface ContentCssProps {
   onClick?: () => void;
@@ -15,7 +13,6 @@ interface ContentCssProps {
 const STYLES_NO_MARGINS = css`
   margin-top: 0px;
   margin-bottom: 0px;
-  color: #484848;
 `;
 
 /* Headings */
@@ -27,18 +24,23 @@ const STYLES_NO_MARGINS = css`
  * used for page banner / main product name
  * @param props contentCss if needed
  */
-export const H2 = (props: ContentCssProps) => {
-  const DarkModeState = useContext(DarkMode);
-  const STYLES_FONT_COLOR = DarkModeState
-    ? css`
-        color: white;
-      `
-    : css``;
+export const H1 = (props: ContentCssProps) => {
   return (
-    <h2
-      onClick={props.onClick}
-      css={[STYLES_NO_MARGINS, STYLES_FONT_COLOR, props.contentCss]}
-    >
+    <h1 onClick={props.onClick} css={[STYLES_NO_MARGINS, props.contentCss]}>
+      {props.children}
+    </h1>
+  );
+};
+
+/**
+ * Default padding: rawSpacing.xl / 32px
+ * if separating from top: 2x / 64px
+ * used for page banner / main product name
+ * @param props contentCss if needed
+ */
+export const H2 = (props: ContentCssProps) => {
+  return (
+    <h2 onClick={props.onClick} css={[STYLES_NO_MARGINS, props.contentCss]}>
       {props.children}
     </h2>
   );
@@ -51,17 +53,8 @@ export const H2 = (props: ContentCssProps) => {
  * @param props contentCss if needed
  */
 export const H3 = (props: ContentCssProps) => {
-  const DarkModeState = useContext(DarkMode);
-  const STYLES_FONT_COLOR = DarkModeState
-    ? css`
-        color: white;
-      `
-    : css``;
   return (
-    <h3
-      onClick={props.onClick}
-      css={[STYLES_NO_MARGINS, STYLES_FONT_COLOR, props.contentCss]}
-    >
+    <h3 onClick={props.onClick} css={[STYLES_NO_MARGINS, props.contentCss]}>
       {props.children}
     </h3>
   );
@@ -73,17 +66,8 @@ export const H3 = (props: ContentCssProps) => {
  * @param props contentCss if needed
  */
 export const H4 = (props: ContentCssProps) => {
-  const DarkModeState = useContext(DarkMode);
-  const STYLES_FONT_COLOR = DarkModeState
-    ? css`
-        color: white;
-      `
-    : css``;
   return (
-    <h4
-      onClick={props.onClick}
-      css={[STYLES_NO_MARGINS, STYLES_FONT_COLOR, props.contentCss]}
-    >
+    <h4 onClick={props.onClick} css={[STYLES_NO_MARGINS, props.contentCss]}>
       {props.children}
     </h4>
   );
@@ -95,17 +79,8 @@ export const H4 = (props: ContentCssProps) => {
  * @param props contentCss if needed
  */
 export const H5 = (props: ContentCssProps) => {
-  const DarkModeState = useContext(DarkMode);
-  const STYLES_FONT_COLOR = DarkModeState
-    ? css`
-        color: white;
-      `
-    : css``;
   return (
-    <h5
-      onClick={props.onClick}
-      css={[STYLES_NO_MARGINS, STYLES_FONT_COLOR, props.contentCss]}
-    >
+    <h5 onClick={props.onClick} css={[STYLES_NO_MARGINS, props.contentCss]}>
       {props.children}
     </h5>
   );
@@ -123,29 +98,12 @@ const STYLES_TEXT = css`
  */
 export const P = (props: ContentCssProps) => {
   const { contentCss, children } = props;
-  const DarkModeState = useContext(DarkMode);
-  const STYLES_FONT_COLOR = DarkModeState
-    ? css`
-        color: white;
-      `
-    : css``;
-  return (
-    <p css={[STYLES_NO_MARGINS, STYLES_TEXT, STYLES_FONT_COLOR, contentCss]}>
-      {children}
-    </p>
-  );
+
+  return <p css={[STYLES_NO_MARGINS, STYLES_TEXT, contentCss]}>{children}</p>;
 };
 
 export const A = (props: ContentCssProps) => {
   const { contentCss, children, targetUrl } = props;
-  const DarkModeState = useContext(DarkMode);
-  const STYLES_FONT_COLOR = DarkModeState
-    ? css`
-        color: white;
-      `
-    : css`
-        color: black;
-      `;
 
   return (
     <a
@@ -156,7 +114,7 @@ export const A = (props: ContentCssProps) => {
             text-decoration: underline;
           }
         `,
-        STYLES_FONT_COLOR,
+
         contentCss,
       ]}
       href={targetUrl}
