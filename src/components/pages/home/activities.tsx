@@ -12,7 +12,7 @@ import overnight from "../../../media/photos/overnight.jpg";
 
 const STYLES_MAIN = css`
   ${horizontalStackCss.xxxl};
-  margin-top: ${rawSpacing.xxxxl}px;
+  margin-top: ${rawSpacing.xxl}px;
   justify-content: flex-start;
   flex-wrap: wrap;
 

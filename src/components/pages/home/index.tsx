@@ -49,13 +49,21 @@ export const HomePage: React.FC = () => {
       <footer
         css={css`
           ${horizontalStackCss.xxxl};
+          justify-content: flex-start;
+          flex-wrap: wrap;
+
           padding-bottom: ${rawSpacing.xxxxl}px;
         `}
       >
         {contacts.map((contact) => {
           const { source, url } = contact;
           return (
-            <H3 key={source}>
+            <H3
+              key={source}
+              contentCss={css`
+                margin-bottom: ${rawSpacing.l}px;
+              `}
+            >
               <A targetUrl={url}>
                 {source.charAt(0).toUpperCase() + source.slice(1)}
               </A>
